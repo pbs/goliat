@@ -105,7 +105,7 @@
                         <div class="caption">
                             <h4>{{ resource.meta.class|capfirst }} <small>Resource</small></h4>
                             {% with resource.attrs as rs %}
-                                {% if resource|summary %}
+                                {% if resource.attrs %}
                                     <table class="table table-bordered" style="border-collapse: collapse;">
                                         <thead>
                                             <tr style="background-color: white;">
