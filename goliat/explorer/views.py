@@ -112,6 +112,12 @@ def load_document(wrapped):
     def wrapper(request, url):
         url = url.encode('ascii')
         try:
+            #XXX: Hack for apache.
+            if not url.startswith('http://'):
+                if url.startswith('http:/'):
+                    url = 'http://' + url[6:]
+                else:
+                    url = 'http://' + url
             document = json.loads(urllib.urlopen(url).read())
         except IOError:
             return HttpResponseServerError("Can't read location.")
