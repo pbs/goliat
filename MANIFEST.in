@@ -1,4 +1,4 @@
-recursive-include explorer/templates *.html
-recursive-include about/templates *.html
-recursive-include explorer/static
-recursive-include about/static
+recursive-include goliat/explorer/templates *.html
+recursive-include goliat/about/templates *.html
+recursive-include goliat/explorer/static *
+recursive-include goliat/about/static *
