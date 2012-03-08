@@ -1,0 +1,10 @@
+{% extends "explorer/topnav.html" %}
+{% load urlutils %}
+
+{% block innercontent %}
+    <div class="row">
+        <div class="span12">
+            <pre style="word-wrap: normal; word-break: normal; white-space: pre; overflow-y: auto;">{{ document.raw }}</pre>
+        </div>
+    </div>
+{% endblock %}

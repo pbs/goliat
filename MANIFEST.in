@@ -1,0 +1,4 @@
+recursive-include explorer/templates *.html
+recursive-include about/templates *.html
+recursive-include explorer/static
+recursive-include about/static

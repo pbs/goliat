@@ -1,0 +1,58 @@
+{% extends "explorer/base.html" %}
+{% load urlutils %}
+{% load static %}
+
+{% block header %}
+<header style="margin-bottom: 64px;">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="brand" style="font-family: 'Exo', sans-serif;
+                    font-style: italic" href="{% url goliat.explorer.views.landing %}"><img src="{% get_static_prefix %}explorer/minilogo.png"> Goliat</a>
+
+                <ul class="nav pull-right">
+                    {% if document.is_collection and not show_source %}
+                        <li><button style="margin-right:18px;" class="btn btn-primary" disabled><i class="icon-plus icon-white"></i> Add</button></li>
+                    {% endif %}
+
+                    {% if document.is_resource and not show_source %}
+                        <li><button style="margin-right: 18px;" class="btn btn-success" disabled><i class="icon-pencil icon-white"></i> Edit</button></li>
+                        <li><button style="margin-right: 18px;" class="btn btn-danger" disabled><i class="icon-trash icon-white"></i> Delete</button></li>
+                    {% endif %}
+
+                    {% if show_source %}
+                        <li><div><a href="{% url goliat.explorer.views.result url %}" class="btn btn-info active"><i class="icon-file icon-white"></i> Source</div></a></li>
+                    {% else %}
+                        <li><div><a href="{% url goliat.explorer.views.source url %}" class="btn btn-info"><i class="icon-file icon-white"></i> Source</div></a></li>
+                    {% endif %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+ 
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="span12 row">
+
+            {% if document.is_resource %}
+                <h2>{{ document.page_name }} <small>Resource</small></h2>
+            {% endif %}
+            {% if document.is_collection %}
+                <h2>{{ document.page_name }} <small> Collection</small></h2>
+            {% endif %}
+            {% if document.is_service %}
+                <h2>Index <small>Service</small></h2>
+            {% endif %}
+
+            <code style="display: inline-block; width: 930px; overflow: auto;">{{ url }}</code>
+        </div>
+    </div>
+    <div class="span12" style="margin-bottom: 32px;"></div>
+    {% block innercontent %}{% endblock %}
+</div>
+{% endblock %}

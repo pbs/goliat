@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Presentation</title>
+
+    <meta charset='utf-8'>
+    <script
+        src='{% get_static_prefix %}about/slides.js'></script>
+
+    <link
+      href='http://fonts.googleapis.com/css?family=Exo:400,900,700italic' rel='stylesheet' type='text/css'>
+
+  </head>
+
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+    article {
+        background-image: url({% get_static_prefix %}about/bg.jpg) !important;
+        background-repeat: repeat !important;
+        background-position: center center !important;
+    }
+    p {
+        color: whitesmoke !important;
+        font-size: 28px !important;
+        text-shadow: 1px 1px black !important;
+    }
+    h1.g {
+        font-weight: normal !important;
+        color: wthie !important;
+        text-shadow: 1px 1px indigo, 0px 0px 10px white !important;
+        font-family: 'Exo', sans-serif !important;
+        font-style: italic !important;
+        margin-top: 100px !important;
+    }
+    h1 {
+        margin: 0px !important;
+        font-weight: normal !important;
+        text-shadow: 0px 0px 20px black, 2px 1px black, -1px -1px indigo !important;
+        color: whitesmoke !important;
+    }
+
+    article.landing {
+        background-image: url({% get_static_prefix %}about/landing.png), url({% get_static_prefix %}about/bg.jpg) !important;
+        background-repeat: no-repeat, repeat !important;
+        background-position: 350px 100px, center center !important;
+        background-size: 80%, auto;
+    }
+
+    article.service {
+        background-image: url({% get_static_prefix %}about/service.png), url({% get_static_prefix %}about/bg.jpg) !important;
+        background-repeat: no-repeat, repeat !important;
+        background-position: 350px 100px, center center !important;
+        background-size: 80%, auto;
+    }
+
+    article.collection {
+        background-image: url({% get_static_prefix %}about/collection.png), url({% get_static_prefix %}about/bg.jpg) !important;
+        background-repeat: no-repeat, repeat !important;
+        background-position: 350px 100px, center center !important;
+        background-size: 80%, auto;
+    }
+
+    article.resource {
+        background-image: url({% get_static_prefix %}about/resource.png), url({% get_static_prefix %}about/bg.jpg) !important;
+        background-repeat: no-repeat, repeat !important;
+        background-position: 350px 100px, center center !important;
+        background-size: 80%, auto;
+    }
+    div.shadow {
+        width: 600px;
+        height: 548px;
+        position: absolute;
+        left: 350px;
+        top: 100px;
+        box-shadow: -5px 5px 10px black, 0px 0px 50px indigo;
+    }
+
+    p small {
+        color: PaleTurquoise     !important;
+    }
+
+    a, a:hover {
+        color: white !important;
+        text-decoration: none;
+    }
+
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+
+
+      <article class="landing">
+      <div class="shadow"></div>
+      <h1 class="g">Goliat</h1>
+      <h1>The API<br>Explorer</h1>
+        <p>
+          <small>Sever Băneşiu</small>
+          <br>
+          <small>Furău Călin</small>
+          <br>
+          <small>Dan Pop</small>
+          <br>
+          <small>Janos Seichei</small>
+          <br>
+          <br>
+          February 28, 2012
+        </p>
+      </article>
+
+      <article class="service">
+      <div class="shadow"></div>
+      <h1 class="g">Goliat</h1>
+      <h1>Service<br>Index</h1>
+        <p style="width: 280px;">
+            Top-level collections and resources.
+         <p style="width: 280px;">
+            Everything should be reachable from this <i>"homepage"</i>.
+        </p>
+       </p>
+      </article>
+
+      <article class="collection">
+      <div class="shadow"></div>
+      <h1 class="g">Goliat</h1>
+      <h1>Collection</h1>
+        <p style="width: 280px;">
+            A group of resources.
+         <p style="width: 280px;">
+            Supports filtering if implemented.
+        </p>
+         <p style="width: 280px;">
+             Collections are containers only, and have no <i>"useful"</i> metadata associated.
+        </p>
+       </p>
+      </article>
+
+      <article class="resource">
+      <div class="shadow"></div>
+      <h1 class="g">Goliat</h1>
+      <h1>Resource</h1>
+        <p style="width: 280px;">
+            Groups together <i>"useful"</i> metadata values.
+         <p style="width: 280px;">
+            Can have multiple representations.
+        </p>
+         <p style="width: 280px;">
+            Has links to other resources or collections.
+        </p>
+       </p>
+      </article>
+
+      <article>
+      <h1 class="g">Goliat</h1>
+      <h1>Any questions before<br>the <strong><a href="{% url goliat.explorer.views.landing %}">takeoff</a></strong>?</h1>
+      </article>
+
+    </section>
+
+  </body>
+</html>

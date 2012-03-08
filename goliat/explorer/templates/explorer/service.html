@@ -1,0 +1,31 @@
+{% extends "explorer/topnav.html" %}
+{% load urlutils %}
+
+{% block innercontent %}
+<div class="row">
+    <div class="span12">
+        <ul class="thumbnails">
+            {% for service_name, service_details in document.meta.services.items %}
+            <li class="span3" style="background-color: white;">
+                <a href="{% url goliat.explorer.views.result service_details.meta.self %}" class="thumbnail">
+                    <img src="http://placehold.it/260x180" alt="">
+                    <div class="caption">
+                        {% if service_details.is_collection %}
+                        <h3><small>Collection</small></h3>
+                        {% endif %}
+                        {% if service_details.is_resource %}
+                        <h3><small>Resource</small></h3>
+                        {% endif %}
+                        <h3>{{ service_name|capfirst }}</h3>
+                        <p>{{ service_details.meta.description|safe }}</p>
+                    </div>
+                </a>
+            </li>
+            {% if forloop.counter|divisibleby:"4" %}
+            <div style="clear:both"></div>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

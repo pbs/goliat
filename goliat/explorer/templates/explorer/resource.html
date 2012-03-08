@@ -1,0 +1,146 @@
+{% extends "explorer/topnav.html" %}
+{% load urlutils %}
+
+{% block innercontent %}
+<div class="row">
+    <div class="span6 row">
+        <h3>Useful Information</h3>
+        {% with document.attrs as ui %}
+            {% if ui %}
+            <table class="table table-bordered" style="border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: white;">
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in ui.items %}
+                    <tr>
+                        <td><strong>{{ key }}</strong></td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <div class="alert alert-warn alert-block">
+                    <h4 class="alert-heading">Aboard takeoff!</h4>
+                    <p>There is no useful information for this resource.</p>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="span6">
+        <h3>Alternate Representations</h3>
+        <ul class="nav nav-tabs nav-stacked">
+            <li class="active">
+                <a>{{ document.meta.type }}</a>
+            </li>
+            {% for alt_name, alt_url in document.meta.alternate.items %}
+            <li>
+                <a href="{{ alt_url }}">{{ alt_name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <h3>Resource Metadata</h3>
+        {% if document.meta.hash or document.meta.id or document.meta.created or document.meta.modified %}
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="span2">Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if document.meta.id %}
+                <tr>
+                    <td><strong>Resource ID</strong></td>
+                    <td><code>{{ document.meta.id }}</code></td>
+                </tr>
+                {% endif %}
+                {% if document.meta.hash %}
+                <tr>
+                    <td><strong>Hash</strong></td>
+                    <td><code>{{ document.meta.hash }}</code></td>
+                </tr>
+                {% endif %}
+                {% if document.meta.created %}
+                <tr>
+                    <td><strong>Created on</strong></td>
+                    <td>{{ document.meta.created|date:"m/d/Y P" }}</td>
+                </tr>
+                {% endif %}
+                {% if document.meta.edited %}
+                <tr>
+                    <td><strong>Edited on</strong></td>
+                    <td>{{ document.meta.edited|date:"m/d/Y P" }}</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        {% else %}
+            <div class="alert alert-info alert-block">
+                <h4 class="alert-heading">Captain,</h4>
+                <p>There's no metadata available for this resource.</p>
+            </div>
+        {% endif %}
+        <h3>Related Content</h3>
+        {% if document.meta.links %}
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="span2">Name</th>
+                    <th class="span2">Type</th>
+                    <th class="span2">Class</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for link in document.meta.links %}
+                <tr>
+                    <td><a
+                            rel="popover"
+                            title="Summary"
+                            data-content='
+                            {% with link.attrs as ls %}
+                            {% if ls %}
+                                <table class="table table-bordered" style="border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background-color: white;">
+                                            <th>Attribute</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for key, value in ls.items %}
+                                        <tr>
+                                            <td><strong>{{ key }}</strong></td>
+                                            <td>{{ value }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                No summary available for this relationship.
+                            {% endif %}
+                            {% endwith %}
+                            '
+                            href="{% url goliat.explorer.views.result link.meta.self %}">
+                            <strong>{{ link.meta.relationship|capfirst }}</strong>
+                    </a></td>
+                    <td>{% if link.meta.type == "application/vnd.pbs-resource+json" %}Resource{% else %}Collection{% endif %}</td>
+                    <td>{{ link.page_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <div class="alert alert-info alert-block">
+                <h4 class="alert-heading">Control tower,</h4>
+                <p>This resource is flying alone. No relationships found.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

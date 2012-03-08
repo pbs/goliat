@@ -1,0 +1,27 @@
+{% extends "explorer/base.html" %}
+{% load static %}
+
+{% block header %}
+<header>
+        <div style="width:215px; margin-left: auto; margin-right: auto; margin-bottom: 36px; margin-top: 36px;">
+                <img src="{% get_static_prefix %}explorer/goliat_logo.png" alt="PBS Goliat logo"/>
+                <h1 style="text-align: center; width: 100%; font-family: 'Exo', sans-serif; font-style: italic; font-size: 36px; margin-top: 18px;">Goliat</h1>
+        </div> 
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+        <form method='post' action='{% url goliat.explorer.views.landing %}'>
+                {% csrf_token %}
+                <div class="row">
+                        <div class="offset3 span5 row">
+                                <input name='api_location' type="url" style="height:27px; font-size: 16px;" required class="span5" placeholder="Type your API URL destination...">
+                        </div>
+                        <div class="span4">
+                                <button type="submit" class="btn btn-large"><i class="icon-plane"></i> Take off</button>
+                        </div>
+                </div>
+        </form>
+</div>
+{% endblock %}
