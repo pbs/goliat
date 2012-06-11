@@ -99,13 +99,13 @@ class APIDocument(object):
         #current_page = self._data['$page']
         print self._data
         current_page = int(self._data['$page'])
-        return template.replace('{page}', str(current_page + 1))
+        return template.replace('{page_num}', str(current_page + 1))
 
     def prev_url(self):
         template = self._data['$page_control']
         #current_page = self._data['$page']
         current_page = int(self._data['$page'])
-        return template.replace('{page}', str(current_page - 1))
+        return template.replace('{page_num}', str(current_page - 1))
 
 
 def load_document(wrapped):
