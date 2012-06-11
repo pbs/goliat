@@ -4,12 +4,12 @@
 {% block innercontent %}
     <div class="row">
         <div class="span6 row">
-            {% with document.meta.templates as templates %} 
+            {% with document.meta.filters as filters %} 
                 <h3>Collection Filters</h3>
-                {% if templates %}
+                {% if filters %}
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs span2">
-                        {% for filter_name in templates %}
+                        {% for filter_name in filters %}
                             {% if forloop.first %}
                             <li class="active"><a data-toggle="tab" href="#{{ filter_name }}">{{ filter_name|capfirst }}</a></li>
                             {% else %}
@@ -18,7 +18,7 @@
                         {% endfor %}
                     </ul>
                     <div class="tab-content">
-                        {% for filter_name, filter_url in templates.items %}
+                        {% for filter_name, filter_url in filters.items %}
                             {% if forloop.first %}
                             <div class="tab-pane fade in active" id="{{ filter_name }}">
                             {% else %}
