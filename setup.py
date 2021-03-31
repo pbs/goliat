@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 dependencies = [
-    'django==1.3',
+    'django==1.11.29',
     'django-extraconfig',
 ]
 
